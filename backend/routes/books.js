@@ -131,4 +131,21 @@ router.get('/:id', adminAuthenticator, async (req, res) => {
     data: bookFound
   })
 })
+
+
+// now we need to add a downloding option for the book and set for 
+
+router.get('/download/:bookName', adminAuthenticator, (req, res) => {
+  const bookName = req.params.bookName
+  const bookPath = path.join(__dirname, `../uploads/${bookName}`)
+
+  res.download(bookPath, (err) => {
+    res.status(500).send({
+      message: "fail: cannot download the book.",
+      error: err
+    })
+  })
+})
+
+
 module.exports = router
