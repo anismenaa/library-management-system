@@ -3,6 +3,8 @@ const dotenv = require("dotenv")
 const mongoose = require("mongoose")
 const services = require("./services")
 const authRoutes = require("./routes/authentification")
+const booksRoutes = require("./routes/books")
+const cookieParser = require("cookie-parser")
 
 // Load env variables
 dotenv.config()
@@ -15,7 +17,9 @@ const app = express()
 
 // middleware
 app.use(express.json())
+app.use(cookieParser())
 app.use("/auth", authRoutes)
+app.use("/books", booksRoutes)
 
 
 
